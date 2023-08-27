@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Códigos</title>
+</head>
+<body>
+    <h1>Lista de Códigos</h1>
+
+    <input type="text" id="searchInput" placeholder="Pesquise o nome, código ou marca">
+    
+    <div id="itemListContainer">
+        <!-- A lista de itens será carregada aqui -->
+    </div>
+
+    <script>
+        // Obtém o elemento de entrada de pesquisa e o contêiner da lista
+        const searchInput = document.getElementById('searchInput');
+        const itemListContainer = document.getElementById('itemListContainer');
+
+        // Função para carregar a lista de itens do arquivo HTML separado
+        async function loadItems() {
+            try {
+                const response = await fetch('listaDeCodigos.html');
+                const data = await response.text();
+
+                // Insere o conteúdo do arquivo HTML na div do contêiner da lista
+                itemListContainer.innerHTML = data;
+            } catch (error) {
+                console.error('Erro ao carregar os itens:', error);
+            }
+        }
+
+        // Chama a função para carregar os itens quando a página carrega
+        loadItems();
+
+        // Adiciona um ouvinte de evento de entrada à entrada de pesquisa
+        searchInput.addEventListener('input', function () {
+            const searchTerm = searchInput.value.toLowerCase();
+            const items = itemListContainer.getElementsByTagName('li');
+
+            // Itera sobre os itens da lista
+            for (let i = 0; i < items.length; i++) {
+                const itemText = items[i].textContent.toLowerCase();
+                // Verifica se o termo de pesquisa está contido no texto do item
+                if (itemText.includes(searchTerm)) {
+                    items[i].style.display = 'block'; // Mostra o item
+                } else {
+                    items[i].style.display = 'none'; // Oculta o item
+                }
+            }
+        });
+    </script>
+</body>
+</html>
