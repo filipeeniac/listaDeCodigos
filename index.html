@@ -28,6 +28,27 @@
 
                 // Insere o conteúdo do arquivo HTML na div do contêiner da lista
                 itemListContainer.innerHTML = data;
+
+                // Adiciona um ouvinte de evento de entrada à entrada de pesquisa
+                searchInput.addEventListener('input', function () {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const items = itemListContainer.getElementsByTagName('li');
+
+                    // Itera sobre os itens da lista
+                    for (let i = 0; i < items.length; i++) {
+                        const itemText = items[i].textContent.toLowerCase();
+                        // Verifica se o termo de pesquisa está contido no texto do item
+                        if (itemText.includes(searchTerm)) {
+                            items[i].style.display = 'block'; // Mostra o item
+                        } else {
+                            items[i].style.display = 'none'; // Oculta o item
+                            // Remove o elemento <br> que segue o item oculto
+                            if (items[i].nextElementSibling && items[i].nextElementSibling.tagName === 'BR') {
+                                items[i].nextElementSibling.remove();
+                            }
+                        }
+                    }
+                });
             } catch (error) {
                 console.error('Erro ao carregar os itens:', error);
             }
@@ -35,23 +56,6 @@
 
         // Chama a função para carregar os itens quando a página carrega
         loadItems();
-
-        // Adiciona um ouvinte de evento de entrada à entrada de pesquisa
-        searchInput.addEventListener('input', function () {
-            const searchTerm = searchInput.value.toLowerCase();
-            const items = itemListContainer.getElementsByTagName('li');
-
-            // Itera sobre os itens da lista
-            for (let i = 0; i < items.length; i++) {
-                const itemText = items[i].textContent.toLowerCase();
-                // Verifica se o termo de pesquisa está contido no texto do item
-                if (itemText.includes(searchTerm)) {
-                    items[i].style.display = 'block'; // Mostra o item
-                } else {
-                    items[i].style.display = 'none'; // Oculta o item
-                }
-            }
-        });
     </script>
 </body>
 </html>
