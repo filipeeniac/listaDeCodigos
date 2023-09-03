@@ -1,0 +1,31 @@
+body {
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+}
+
+h1 {
+    color: rgb(0, 0, 0);
+    padding-left: 1%;
+    font-size: 40px;
+}
+ul {
+    color: rgb(0, 0, 0);
+    font-size: 25px ;
+    padding-left:1% ;
+    padding-right: 1%;
+    
+}
+
+li {
+    border: 1px solid rgb(164, 166, 169);
+    padding: 10px;
+}
+
+
+input {
+    border-radius: 15px ;
+    border: 3px solid rgb(164, 166, 169);
+    box-sizing: border-box;
+    font-size: 20px;
+    width: 355px; 
+}
